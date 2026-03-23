@@ -71,7 +71,7 @@ def get_api_key() -> str | None:
     # Claude Code subscription: read OAuth token directly
     if llm.get("use_claude_code_subscription"):
         try:
-            from framework.runner.runner import get_claude_code_token
+            from framework.auth import get_claude_code_token
 
             token = get_claude_code_token()
             if token:
@@ -82,7 +82,7 @@ def get_api_key() -> str | None:
     # Codex subscription: read OAuth token from Keychain / auth.json
     if llm.get("use_codex_subscription"):
         try:
-            from framework.runner.runner import get_codex_token
+            from framework.auth import get_codex_token
 
             token = get_codex_token()
             if token:
@@ -137,7 +137,7 @@ def get_llm_extra_kwargs() -> dict[str, Any]:
                 "User-Agent": "CodexBar",
             }
             try:
-                from framework.runner.runner import get_codex_account_id
+                from framework.auth import get_codex_account_id
 
                 account_id = get_codex_account_id()
                 if account_id:
